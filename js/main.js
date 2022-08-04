@@ -62,7 +62,7 @@
            
             //alert('ingreso exitoso');
            
-                window.open('menuPrincipal.html');
+                window.open('menuPrincipal.html','_self');
             
           //  window.open('menuPrincipal.html');
 
