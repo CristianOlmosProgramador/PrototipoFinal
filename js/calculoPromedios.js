@@ -1,5 +1,5 @@
 
-    // Acá no logre como llamar al constructor de la clase Alumnos para obtener el DNI y el nombre completo. :(
+    // Acá no supe como llamar al constructor de la clase Alumnos para obtener el DNI y el nombre :(
     
     class Promedio{
 
@@ -25,6 +25,7 @@
     const notaDos = document.querySelector('#Nota2');
     const notaTres = document.querySelector('#Nota3');
     const btnPromediar = document.querySelector('#promediarCalificaciones');
+    const btnCerrar = document.querySelector('#cerrar');
 
     const arrPromedios = [];
     
@@ -74,11 +75,11 @@
         return resultado;
     }
 
-    function crearTablaHtml(resultado, obs){
+    function crearTablaHtml(dni,nombrecompleto, notaUno, notaDos, notaTres,resultado, obs){
         const tabla = document.getElementById('addtabla');
         const fila  = document.createElement('tr');  
 
-        fila.innerHTML=`<td> ${dni.value} </td><td> ${nombreCompletoAlumno.value} </td><td> ${notaUno.value} </td><td> ${notaDos.value} </td><td> ${notaTres.value} </td><td> ${resultado.toFixed(1)} </td><td> ${obs} </td>`;
+        fila.innerHTML=`<td> ${dni} </td><td> ${nombrecompleto} </td><td> ${notaUno} </td><td> ${notaDos} </td><td> ${notaTres} </td><td> ${resultado.toFixed(1)} </td><td> ${obs} </td>`;
         fila.style.backgroundColor = "#64b5f6";
         
         tabla.appendChild(fila);
@@ -114,7 +115,8 @@
                 let observacion = obs(resultado);
                 
                 if(existeAlumnoPromedio()){
-                    crearTablaHtml(resultado,observacion);
+                    crearTablaHtml(dni.value,nombreCompletoAlumno.value,notaUno.value,notaDos.value,notaTres.value,resultado,observacion);
+                    LimpiarCampos();
                 }
                 
              
@@ -154,7 +156,7 @@
         if(buscarAlumnoPromedio == undefined){
             registrar();
             MensajeExitoso();
-            LimpiarCampos();
+          
             return true;
           
         }else{
@@ -186,4 +188,37 @@
     
     }
 
+
+    // para cerrar sessión. 
+
+    btnCerrar.addEventListener('click', ()=>{
+
+        
+    Swal.fire({
+        title: '¿Está seguro que desea cerrar su sessión?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'SI',
+        denyButtonText: 'NO',
+        customClass: {
+          actions: 'my-actions',
+          cancelButton: 'order-1 right-gap',
+          confirmButton: 'order-2',
+          denyButton: 'order-3',
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+         // Swal.fire('Saved!', '', 'success')
+         window.open('index.html');
+        } else if (result.isDenied) {
+        //   Swal.fire('Changes are not saved', '', 'info')
+        }
+      })
+
+
+    });
+
     console.log(arrPromedios);
+
+
+    // en la segunda entrega ya quiero lograr hacer que actualice la calificación y también que permita eliminar.
