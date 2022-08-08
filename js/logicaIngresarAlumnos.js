@@ -11,9 +11,9 @@ class Alumnos{
         this.curso = curso;
     }
 
-    agregarAlumno(objAlumno){
-        return arrAlumnos.push(objAlumno);
-    }
+    // agregarAlumno(objAlumno){
+    //     return arrAlumnos.push(objAlumno);
+    // }
 
 }
 
@@ -74,7 +74,9 @@ function ingresarAlumnos(){
 
 
     const ingresarAlumno = new Alumnos(dniIng,nombreAlumnoIng,apellidoPaternoIng, apellidoMaternoIng,edadIng,cursoIng);
-    ingresarAlumno.agregarAlumno(ingresarAlumno);
+    //ingresarAlumno.agregarAlumno(ingresarAlumno);
+    arrAlumnos.push(ingresarAlumno);
+
 
     const tabla=document.getElementById('addtabla');
     const fila=document.createElement('tr');  
@@ -169,3 +171,5 @@ const LimpiarCampos = ()=>{
     curso.value = '';
 
 }
+
+console.log(arrAlumnos);
