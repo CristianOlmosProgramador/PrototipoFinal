@@ -222,3 +222,64 @@
 
 
     // en la segunda entrega ya quiero lograr hacer que actualice la calificación y también que permita eliminar.
+
+    const validarAlumnos = ()=>{
+
+        
+
+    }
+
+    function existeAlumno(arr){
+
+        let dniAlumno = document.querySelector('#dni');
+        let dniUtilizar = dniAlumno.value;
+
+    
+        const alumnosLocalStorage = traerAlumnosLocalStorge();
+        console.log("array alumnos ultimo"+ alumnosLocalStorage);
+    
+        const buscarAlumno = alumnosLocalStorage.find((elemento,indice,array)=>{
+            return elemento.dni == dniUtilizar
+        })    
+    
+        console.log(buscarAlumno);
+    
+        if(buscarAlumno == undefined){
+            // ingresarAlumnos(); 
+            // MensajeExitoso();
+            // LimpiarCampos();
+            console.log('no se encuentra dni asociado en la base de datos');
+        }else{
+            // si está el alumno lo ingreso al nuevo array de alumno buscado. 
+            //arrAlumnoBuscado.push(buscarAlumno);
+            //console.log('el dni del alumno ya se encuentra registrado, intente nuevamente.');
+           
+            
+        }
+
+
+    }
+
+    
+    function traerAlumnosLocalStorge(){
+
+    const obtenerAlumnosLS = localStorage.getItem("Datos Alumnos");
+    console.log("Ver array desde función existe alumno " + typeof JSON.parse(obtenerAlumnosLS));
+
+    let jsonAlumnos1 = JSON.parse(obtenerAlumnosLS);
+    console.log(jsonAlumnos1);
+
+    return jsonAlumnos1;
+
+    }
+
+        dni.addEventListener('keyup', ()=>{
+
+           // const arraycito = traerAlumnosLocalStorge();
+            existeAlumno();
+
+        });
+
+
+   
+

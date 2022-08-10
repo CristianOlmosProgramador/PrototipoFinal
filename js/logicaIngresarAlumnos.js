@@ -75,8 +75,9 @@ function ingresarAlumnos(){
 
     const ingresarAlumno = new Alumnos(dniIng,nombreAlumnoIng,apellidoPaternoIng, apellidoMaternoIng,edadIng,cursoIng);
     //ingresarAlumno.agregarAlumno(ingresarAlumno);
-    arrAlumnos.push(ingresarAlumno);
-
+     arrAlumnos.push(ingresarAlumno);
+     
+     registrarLocalStorage();
 
     const tabla=document.getElementById('addtabla');
     const fila=document.createElement('tr');  
@@ -94,12 +95,25 @@ function ingresarAlumnos(){
 
 
 btnRegistrarAlumno.addEventListener('click',()=>{
-
-    if(Validaciones()){
-        existeAlumno();
-    }
+  
+    // traerAlumnosLocalStorge();
+     if(Validaciones()){
+       existeAlumno();
+     }
 
 });
+
+function traerAlumnosLocalStorge(){
+
+    const obtenerAlumnosLS = localStorage.getItem("Datos Alumnos");
+    console.log("Ver array desde función existe alumno " + typeof JSON.parse(obtenerAlumnosLS));
+
+    let jsonAlumnos1 = JSON.parse(obtenerAlumnosLS);
+    console.log(jsonAlumnos1);
+
+    return jsonAlumnos1;
+
+}
 
 
 function existeAlumno(){
@@ -107,7 +121,10 @@ function existeAlumno(){
     let dniAlumno = document.querySelector('#dni');
     let dniUtilizar = dniAlumno.value;
 
-    const buscarAlumno = arrAlumnos.find((elemento,indice,array)=>{
+    const alumnosLocalStorage = traerAlumnosLocalStorge();
+    console.log("array alumnos ultimo"+ alumnosLocalStorage);
+
+    const buscarAlumno = alumnosLocalStorage.find((elemento,indice,array)=>{
         return elemento.dni == dniUtilizar
     })    
 
@@ -173,3 +190,40 @@ const LimpiarCampos = ()=>{
 }
 
 console.log(arrAlumnos);
+
+// 08.08.2022.
+//Trabajando para guardar Alumnos en el LocalStorage... 
+
+// Registro con objeto en localStorage
+const registrarLocalStorage = () => {
+
+    try{
+      
+        const jsonAlumnos = JSON.stringify(arrAlumnos)
+        console.log("Alumnos" + jsonAlumnos);
+
+        localStorage.setItem("Datos Alumnos", jsonAlumnos);
+
+        
+
+        // let usuarioFinal = {
+        //     nombreCompleto : NombreCompleto.value,
+        //     email : Email.value,
+        //     telefono : Telefono.value, 
+        //     usuario : Usuario.value, 
+        //     pass : Pass.value
+        // }
+    
+        // localStorage.setItem("nombreCompleto", usuarioFinal.nombreCompleto);
+        // localStorage.setItem("email", usuarioFinal.email);
+        // localStorage.setItem("telefono", usuarioFinal.telefono);
+        // localStorage.setItem("usuario", usuarioFinal.usuario);
+        // localStorage.setItem("pass", usuarioFinal.pass);
+
+        return true;
+
+    }catch{
+        return false;
+    }
+ 
+}
