@@ -1,12 +1,14 @@
-'use strict'; 
-
+    import Login, {login} from '../Login/login.js';
+    
+    
+    
     const btnLogin = document.querySelector('#login');
     const email = document.querySelector('#correo');
     const pass = document.querySelector('#pass');
     const modal = document.querySelector("#modal");
     const arrLogin = obtenerLocalStorage();
-   
-  
+
+
 
     function validarCredencialesModal(){
         swal("Ingrese sus credenciales", "La credenciales no pueden estar vacias", "warning");
